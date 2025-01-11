@@ -4,69 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>School App</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .top-bar {
+      background-color: #0078d4;
+      padding: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-bar h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    .nav-bar {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-bar button {
+      background-color: white;
+      color: #0078d4;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .nav-bar button:hover {
+      background-color: #005bb5;
+      color: white;
+    }
+    #main-content {
+      padding: 20px;
+    }
+    #login-page, #tokens-page, #assignments-page {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <div id="navbar">
-    <button id="home-button" onclick="homePage()">School App</button>
-    <button class="tab-button" onclick="openTab(event, 'canvas')">Canvas</button>
-    <button class="tab-button" onclick="openTab(event, 'clever')">Clever</button>
-    <button class="tab-button" onclick="openTab(event, 'tokens')">API Tokens</button>
-    <button class="tab-button" onclick="openTab(event, 'help')">Help</button>
-    <button class="tab-button" onclick="openTab(event, 'resources')">Resources</button>
-    <button class="tab-button" onclick="openTab(event, 'about')">About</button>
+  <div class="top-bar">
+    <h1 id="home-button" style="cursor: pointer;">School App</h1>
+    <div class="nav-bar">
+      <button onclick="showPage('assignments-page')">Canvas</button>
+      <button onclick="showPage('tokens-page')">API Tokens</button>
+    </div>
+  </div>
+  
+  <div id="login-page">
+    <h2>Login</h2>
+    <form id="login-form">
+      <label for="user-name">Enter Your Name:</label><br>
+      <input type="text" id="user-name" placeholder="Your Name" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+    <p id="login-status" style="color: red; margin-top: 10px;"></p>
   </div>
 
-  <!-- Login Page (visible initially) -->
-  <div id="login-page">
-  <h2>Login</h2>
-  <form id="login-form">
-    <label for="user-name">Enter Your Name:</label><br>
-    <input type="text" id="user-name" placeholder="Your Name" required><br><br>
-    <button type="submit">Login</button>
-  </form>
-  <p id="login-status" style="color: red; margin-top: 10px;"></p>
-</div>
-  
-  <!-- Main Content (visible after login) -->
-  <div id="main-content" style="display:none;">
-    <div id="canvas" class="tab-content">
-      <h2>Upcoming Assignments</h2>
+  <div id="main-content">
+    <div id="assignments-page">
+      <h2>Your Assignments</h2>
       <ul id="assignments-list"></ul>
     </div>
-
-    <div id="clever" class="tab-content">
-      <h2>Clever Tab</h2>
-      <p>Information for the Clever system will go here.</p>
-    </div>
-
-    <div id="tokens" class="tab-content">
-      <h2>Manage API Tokens</h2>
+    
+    <div id="tokens-page">
+      <h2>Store API Tokens</h2>
       <form id="tokens-form">
         <label for="canvas-token">Canvas API Token:</label><br>
-        <input type="text" id="canvas-token" placeholder="Enter Canvas API Token"><br><br>
-        <label for="clever-token">Clever API Token:</label><br>
-        <input type="text" id="clever-token" placeholder="Enter Clever API Token"><br><br>
+        <input type="text" id="canvas-token" placeholder="Your Canvas API Token"><br><br>
+        <label for="canvas-domain">Canvas Domain:</label><br>
+        <input type="text" id="canvas-domain" placeholder="e.g., canvas.instructure.com"><br><br>
+        <label for="clever-token">Clever API Token (optional):</label><br>
+        <input type="text" id="clever-token" placeholder="Your Clever API Token"><br><br>
         <button type="submit">Save Tokens</button>
       </form>
       <p id="tokens-status" style="color: green; margin-top: 10px;"></p>
-    </div>
-
-    <div id="help" class="tab-content">
-      <h2>Help</h2>
-      <p>Get assistance here.</p>
-    </div>
-
-    <div id="resources" class="tab-content">
-      <h2>Resources</h2>
-      <p>Useful resources for learning.</p>
-    </div>
-
-    <div id="about" class="tab-content">
-      <h2>About</h2>
-      <p>Information about this website.</p>
     </div>
   </div>
 
