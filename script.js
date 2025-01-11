@@ -99,9 +99,7 @@ function fetchAssignments() {
 }
 
 // Home button functionality (return to login page)
-document.getElementById("home-button").addEventListener("click", () => {
+document.getElementById("home-button").addEventListener("click", function () {
   document.getElementById("main-content").style.display = "none";
   document.getElementById("login-page").style.display = "block";
-  document.getElementById("user-name").value = '';
-  document.getElementById("login-status").textContent = '';
 });
