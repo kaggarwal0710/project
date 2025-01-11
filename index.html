@@ -21,16 +21,15 @@
 
   <!-- Login Page (visible initially) -->
   <div id="login-page">
-    <h2>Login to Canvas</h2>
-    <form id="login-form">
-      <label for="api-token">Enter your Canvas API Token:</label><br>
-      <input type="text" id="api-token" placeholder="API Token" required><br><br>
-      <label for="canvas-domain">Enter your Canvas Domain (e.g., canvas.instructure.com):</label><br>
-      <input type="text" id="canvas-domain" placeholder="Canvas Domain" required><br><br>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-
+  <h2>Login</h2>
+  <form id="login-form">
+    <label for="user-name">Enter Your Name:</label><br>
+    <input type="text" id="user-name" placeholder="Your Name" required><br><br>
+    <button type="submit">Login</button>
+  </form>
+  <p id="login-status" style="color: red; margin-top: 10px;"></p>
+</div>
+  
   <!-- Main Content (visible after login) -->
   <div id="main-content" style="display:none;">
     <div id="canvas" class="tab-content">
