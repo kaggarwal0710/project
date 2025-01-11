@@ -2,11 +2,14 @@
 let apiKey = '';
 let canvasDomain = '';
 
-// Show the selected page
+// Show the selected page (Canvas or Tokens)
 function showPage(pageId) {
+  // Hide all pages inside #main-content
   document.querySelectorAll('#main-content > div').forEach((page) => {
     page.style.display = 'none';
   });
+
+  // Show the selected page
   document.getElementById(pageId).style.display = 'block';
 }
 
@@ -20,16 +23,14 @@ document.getElementById("login-form").addEventListener("submit", function (event
     return;
   }
 
-  // Retrieve stored credentials
+  // Retrieve stored credentials from localStorage
   const userCredentials = JSON.parse(localStorage.getItem('userCredentials')) || {};
-  console.log("User entered:", userName);
-  console.log("Stored credentials:", userCredentials);
 
   if (userCredentials[userName]) {
     apiKey = userCredentials[userName].apiKey;
     canvasDomain = userCredentials[userName].domain;
 
-    document.getElementById("login-status").textContent = '';
+    // Hide the login page and show the main content
     document.getElementById("login-page").style.display = "none";
     document.getElementById("main-content").style.display = "block";
 
@@ -97,7 +98,7 @@ function fetchAssignments() {
     });
 }
 
-// Home button functionality
+// Home button functionality (return to login page)
 document.getElementById("home-button").addEventListener("click", () => {
   document.getElementById("main-content").style.display = "none";
   document.getElementById("login-page").style.display = "block";
