@@ -1,82 +1,182 @@
-/* General Styles */
+/* General styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+/* Top navigation bar */
+.top-bar {
+  background-color: #0078d4;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-bar button {
+  background-color: white;
+  color: #0078d4;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+.nav-bar button:hover {
+  background-color: #005bb5;
+  color: white;
+}
+
+/* Main content area */
+#main-content {
+  padding: 80px 20px 20px; /* Adding padding to avoid content under top bar */
+}
+
+/* Login page styles */
+#login-page {
+  display: block;
+  padding: 20px;
+  margin-top: 60px; /* Adjusted for top bar */
+}
+
+#login-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+#login-page label {
+  font-size: 1.1em;
+}
+
+#login-page input {
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#login-page button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  border-radius: 5px;
+}
+
+#login-page button:hover {
+  background-color: #005bb5;
+}
+
+#login-status {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Tokens page styles */
+#tokens-page {
+  display: none;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tokens-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+#tokens-page label {
+  font-size: 1.1em;
+}
+
+#tokens-page input {
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#tokens-page button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  border-radius: 5px;
+}
+
+#tokens-page button:hover {
+  background-color: #005bb5;
+}
+
+#tokens-status {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Assignments page styles */
+#assignments-page {
+  display: none;
+}
+
+#assignments-page ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#assignments-page li {
+  background-color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#assignments-page li:hover {
+  background-color: #f4f4f4;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  /* Navbar Styles */
-  #navbar {
-    display: flex;
-    align-items: center;
-    background-color: #0073e6;
-    padding: 10px 20px;
-    color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  .nav-bar button {
+    width: 100%;
+    margin-bottom: 10px;
   }
-  
-  #navbar button {
-    background: none;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
+
+  #login-page form,
+  #tokens-page form {
+    width: 100%;
   }
-  
-  #navbar button:hover {
-    background-color: #005bb5;
-    border-radius: 5px;
-  }
-  
-  #home-button {
-    font-weight: bold;
-    font-size: 18px;
-    margin-right: auto;
-  }
-  
-  /* Login Page */
-  #login-page {
-    text-align: center;
-    margin-top: 100px;
-  }
-  
-  #login-page input {
-    padding: 10px;
-    margin: 10px 0;
-    width: 280px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  #login-page button {
-    padding: 10px 20px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  #login-page button:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Tab Content */
-  .tab-content {
-    display: none;
-    padding: 20px;
-    margin: 20px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tab-content h2 {
-    color: #0073e6;
-    margin-bottom: 20px;
-  }
-  
+}
