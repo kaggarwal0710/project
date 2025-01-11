@@ -4,190 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>School App</title>
-  <style>
-    /* General styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-    }
-
-    h1, h2 {
-      margin: 0;
-    }
-
-    /* Top navigation bar */
-    .top-bar {
-      background-color: #0078d4;
-      padding: 10px;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .top-bar h1 {
-      margin: 0;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    .nav-bar {
-      display: flex;
-      gap: 10px;
-    }
-
-    .nav-bar button {
-      background-color: white;
-      color: #0078d4;
-      border: none;
-      padding: 8px 16px;
-      cursor: pointer;
-      font-size: 1em;
-      border-radius: 5px;
-    }
-
-    .nav-bar button:hover {
-      background-color: #005bb5;
-      color: white;
-    }
-
-    /* Main content area */
-    #main-content {
-      padding: 80px 20px 20px; /* Adding padding to avoid content under top bar */
-    }
-
-    /* Login page styles */
-    #login-page {
-      display: block;
-      padding: 20px;
-      margin-top: 60px; /* Adjusted for top bar */
-    }
-
-    #login-page form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #login-page label {
-      font-size: 1.1em;
-    }
-
-    #login-page input {
-      padding: 8px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    #login-page button {
-      background-color: #0078d4;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 1.1em;
-      border-radius: 5px;
-    }
-
-    #login-page button:hover {
-      background-color: #005bb5;
-    }
-
-    #login-status {
-      color: red;
-      margin-top: 10px;
-    }
-
-    /* Tokens page styles */
-    #tokens-page {
-      display: none;
-      padding: 20px;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #tokens-page form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #tokens-page label {
-      font-size: 1.1em;
-    }
-
-    #tokens-page input {
-      padding: 8px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    #tokens-page button {
-      background-color: #0078d4;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 1.1em;
-      border-radius: 5px;
-    }
-
-    #tokens-page button:hover {
-      background-color: #005bb5;
-    }
-
-    #tokens-status {
-      color: red;
-      margin-top: 10px;
-    }
-
-    /* Assignments page styles */
-    #assignments-page {
-      display: none;
-    }
-
-    #assignments-page ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    #assignments-page li {
-      background-color: white;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-
-    #assignments-page li:hover {
-      background-color: #f4f4f4;
-    }
-
-    /* Responsive styles */
-    @media (max-width: 768px) {
-      .nav-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-bar button {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
-      #login-page form,
-      #tokens-page form {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="top-bar">
@@ -198,6 +15,7 @@
     </div>
   </div>
   
+  <!-- Login Page -->
   <div id="login-page">
     <h2>Login</h2>
     <form id="login-form">
@@ -209,11 +27,13 @@
   </div>
 
   <div id="main-content">
+    <!-- Canvas Assignments Page -->
     <div id="assignments-page">
       <h2>Your Assignments</h2>
       <ul id="assignments-list"></ul>
     </div>
-    
+
+    <!-- API Tokens Page -->
     <div id="tokens-page">
       <h2>Store API Tokens</h2>
       <form id="tokens-form">
