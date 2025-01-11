@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  /* Navbar Styles */
+  #navbar {
+    display: flex;
+    align-items: center;
+    background-color: #0073e6;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #navbar button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  #navbar button:hover {
+    background-color: #005bb5;
+    border-radius: 5px;
+  }
+  
+  #home-button {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: auto;
+  }
+  
+  /* Login Page */
+  #login-page {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  #login-page input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 280px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #login-page button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #login-page button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Tab Content */
+  .tab-content {
+    display: none;
+    padding: 20px;
+    margin: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab-content h2 {
+    color: #0073e6;
+    margin-bottom: 20px;
+  }
+  
