@@ -21,6 +21,7 @@
     .top-bar h1 {
       margin: 0;
       font-size: 1.5em;
+      cursor: pointer;
     }
     .nav-bar {
       display: flex;
@@ -38,17 +39,34 @@
       background-color: #005bb5;
       color: white;
     }
-    #main-content, #tokens-page, #assignments-page {
-      display: none;
-    }
+
+    /* Login page should be visible by default */
     #login-page {
       display: block;
+      padding: 20px;
+    }
+
+    /* Main content should be hidden initially */
+    #main-content {
+      display: none;
+      padding: 20px;
+    }
+
+    /* Canvas and API token pages should be hidden by default */
+    #assignments-page, #tokens-page {
+      display: none;
+    }
+
+    /* Status messages */
+    #login-status, #tokens-status {
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="top-bar">
-    <h1 id="home-button" style="cursor: pointer;">School App</h1>
+    <h1 id="home-button">School App</h1>
     <div class="nav-bar">
       <button onclick="showPage('assignments-page')">Canvas</button>
       <button onclick="showPage('tokens-page')">API Tokens</button>
@@ -62,7 +80,7 @@
       <input type="text" id="user-name" placeholder="Your Name" required><br><br>
       <button type="submit">Login</button>
     </form>
-    <p id="login-status" style="color: red; margin-top: 10px;"></p>
+    <p id="login-status"></p>
   </div>
 
   <div id="main-content">
@@ -82,7 +100,7 @@
         <input type="text" id="clever-token" placeholder="Your Clever API Token"><br><br>
         <button type="submit">Save Tokens</button>
       </form>
-      <p id="tokens-status" style="color: green; margin-top: 10px;"></p>
+      <p id="tokens-status"></p>
     </div>
   </div>
 
