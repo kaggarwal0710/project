@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School App</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div id="navbar">
+    <button id="home-button" onclick="homePage()">School App</button>
+    <button class="tab-button" onclick="openTab(event, 'canvas')">Canvas</button>
+    <button class="tab-button" onclick="openTab(event, 'clever')">Clever</button>
+    <button class="tab-button" onclick="openTab(event, 'tokens')">API Tokens</button>
+    <button class="tab-button" onclick="openTab(event, 'help')">Help</button>
+    <button class="tab-button" onclick="openTab(event, 'resources')">Resources</button>
+    <button class="tab-button" onclick="openTab(event, 'about')">About</button>
+  </div>
+
+  <!-- Login Page (visible initially) -->
+  <div id="login-page">
+    <h2>Login to Canvas</h2>
+    <form id="login-form">
+      <label for="api-token">Enter your Canvas API Token:</label><br>
+      <input type="text" id="api-token" placeholder="API Token" required><br><br>
+      <label for="canvas-domain">Enter your Canvas Domain (e.g., canvas.instructure.com):</label><br>
+      <input type="text" id="canvas-domain" placeholder="Canvas Domain" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- Main Content (visible after login) -->
+  <div id="main-content" style="display:none;">
+    <div id="canvas" class="tab-content">
+      <h2>Upcoming Assignments</h2>
+      <ul id="assignments-list"></ul>
+    </div>
+
+    <div id="clever" class="tab-content">
+      <h2>Clever Tab</h2>
+      <p>Information for the Clever system will go here.</p>
+    </div>
+
+    <div id="tokens" class="tab-content">
+      <h2>Manage API Tokens</h2>
+      <form id="tokens-form">
+        <label for="canvas-token">Canvas API Token:</label><br>
+        <input type="text" id="canvas-token" placeholder="Enter Canvas API Token"><br><br>
+        <label for="clever-token">Clever API Token:</label><br>
+        <input type="text" id="clever-token" placeholder="Enter Clever API Token"><br><br>
+        <button type="submit">Save Tokens</button>
+      </form>
+      <p id="tokens-status" style="color: green; margin-top: 10px;"></p>
+    </div>
+
+    <div id="help" class="tab-content">
+      <h2>Help</h2>
+      <p>Get assistance here.</p>
+    </div>
+
+    <div id="resources" class="tab-content">
+      <h2>Resources</h2>
+      <p>Useful resources for learning.</p>
+    </div>
+
+    <div id="about" class="tab-content">
+      <h2>About</h2>
+      <p>Information about this website.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
