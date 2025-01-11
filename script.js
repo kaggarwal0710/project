@@ -2,6 +2,14 @@
 let apiKey = '';
 let canvasDomain = '';
 
+// Show the selected page
+function showPage(pageId) {
+  document.querySelectorAll('#main-content > div').forEach((page) => {
+    page.style.display = 'none';
+  });
+  document.getElementById(pageId).style.display = 'block';
+}
+
 // Handle login form submission
 document.getElementById("login-form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -12,8 +20,11 @@ document.getElementById("login-form").addEventListener("submit", function (event
     return;
   }
 
-  // Check local storage for the user's API token and domain
+  // Retrieve stored credentials
   const userCredentials = JSON.parse(localStorage.getItem('userCredentials')) || {};
+  console.log("User entered:", userName);
+  console.log("Stored credentials:", userCredentials);
+
   if (userCredentials[userName]) {
     apiKey = userCredentials[userName].apiKey;
     canvasDomain = userCredentials[userName].domain;
@@ -61,10 +72,35 @@ document.getElementById("tokens-form").addEventListener("submit", function (even
   document.getElementById('tokens-status').textContent = 'Tokens saved successfully!';
 });
 
+// Fetch assignments from Canvas API
+function fetchAssignments() {
+  if (!apiKey || !canvasDomain) {
+    alert("Missing API credentials. Please log in first.");
+    return;
+  }
+
+  fetch(`https://${canvasDomain}/api/v1/planner/items`, {
+    headers: { Authorization: `Bearer ${apiKey}` },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const assignmentsList = document.getElementById("assignments-list");
+      assignmentsList.innerHTML = '';
+      data.forEach((item) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${item.plannable.title} (Due: ${item.plannable.due_at})`;
+        assignmentsList.appendChild(listItem);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching assignments:", error);
+    });
+}
+
 // Home button functionality
-function homePage() {
+document.getElementById("home-button").addEventListener("click", () => {
   document.getElementById("main-content").style.display = "none";
   document.getElementById("login-page").style.display = "block";
   document.getElementById("user-name").value = '';
   document.getElementById("login-status").textContent = '';
-}
+});
