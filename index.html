@@ -7,45 +7,36 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="top-bar">
-    <h1 id="home-button">School App</h1>
-    <div class="nav-bar">
-      <button onclick="showPage('assignments-page')">Canvas</button>
-      <button onclick="showPage('tokens-page')">API Tokens</button>
-    </div>
-  </div>
-  
-  <!-- Login Page -->
-  <div id="login-page">
-    <h2>Login</h2>
-    <form id="login-form">
-      <label for="user-name">Enter Your Name:</label><br>
-      <input type="text" id="user-name" placeholder="Your Name" required><br><br>
-      <button type="submit">Login</button>
-    </form>
-    <p id="login-status"></p>
-  </div>
+  <div id="container">
+    <header>
+      <h1>School App</h1>
+      <nav>
+        <ul>
+          <li><a href="#" onclick="showTab('home')">Home</a></li>
+          <li><a href="#" onclick="showTab('canvas')">Canvas</a></li>
+          <li><a href="#" onclick="showTab('apiTokens')">API Tokens</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <div id="tabs">
+      <div id="home" class="tab-content">
+        <h2>Welcome to the School App!</h2>
+        <p>View your assignments and grades.</p>
+      </div>
+      
+      <div id="canvas" class="tab-content">
+        <h2>Your Canvas Assignments</h2>
+        <label for="canvasFeedURL">Enter your Canvas Calendar Feed URL:</label>
+        <input type="text" id="canvasFeedURL" placeholder="Enter Canvas Calendar Feed URL">
+        <button onclick="loadCanvasAssignments()">Load Assignments</button>
+        <div id="assignmentsList"></div>
+      </div>
 
-  <div id="main-content">
-    <!-- Canvas Assignments Page -->
-    <div id="assignments-page">
-      <h2>Your Assignments</h2>
-      <ul id="assignments-list"></ul>
-    </div>
-
-    <!-- API Tokens Page -->
-    <div id="tokens-page">
-      <h2>Store API Tokens</h2>
-      <form id="tokens-form">
-        <label for="canvas-token">Canvas API Token:</label><br>
-        <input type="text" id="canvas-token" placeholder="Your Canvas API Token"><br><br>
-        <label for="canvas-domain">Canvas Domain:</label><br>
-        <input type="text" id="canvas-domain" placeholder="e.g., canvas.instructure.com"><br><br>
-        <label for="clever-token">Clever API Token (optional):</label><br>
-        <input type="text" id="clever-token" placeholder="Your Clever API Token"><br><br>
-        <button type="submit">Save Tokens</button>
-      </form>
-      <p id="tokens-status"></p>
+      <div id="apiTokens" class="tab-content">
+        <h2>API Tokens</h2>
+        <!-- Form for API tokens -->
+      </div>
     </div>
   </div>
 
