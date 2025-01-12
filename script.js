@@ -1,105 +1,82 @@
-// Initialize Canvas API credentials
-let apiKey = '';
-let canvasDomain = '';
+// Function to show the selected tab
+function showTab(tabName) {
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.style.display = tab.id === tabName ? 'block' : 'none';
+  });
+}
 
-// Show the selected page (Canvas or Tokens)
-function showPage(pageId) {
-  // Hide all pages inside #main-content
-  document.querySelectorAll('#main-content > div').forEach((page) => {
-    page.style.display = 'none';
+// Function to fetch and display Canvas assignments from iCal feed
+async function loadCanvasAssignments() {
+  const feedURL = document.getElementById('canvasFeedURL').value.trim();
+  if (!feedURL) {
+    alert("Please enter your Canvas Calendar Feed URL.");
+    return;
+  }
+
+  try {
+    const response = await fetch(feedURL);
+    const icalText = await response.text();
+    const parsedEvents = parseICS(icalText);
+    displayAssignments(parsedEvents);
+  } catch (error) {
+    console.error("Error fetching Canvas calendar feed:", error);
+    alert("There was an error fetching the Canvas calendar feed.");
+  }
+}
+
+// Function to parse the iCal feed (ICS format)
+function parseICS(icsData) {
+  const events = [];
+  const lines = icsData.split('\n');
+  let event = {};
+  
+  lines.forEach(line => {
+    line = line.trim();
+    if (line.startsWith('BEGIN:VEVENT')) {
+      event = {};
+    } else if (line.startsWith('SUMMARY:')) {
+      event.title = line.replace('SUMMARY:', '').trim();
+    } else if (line.startsWith('DTSTART:')) {
+      event.startDate = line.replace('DTSTART:', '').trim();
+    } else if (line.startsWith('DTEND:')) {
+      event.endDate = line.replace('DTEND:', '').trim();
+    } else if (line.startsWith('DESCRIPTION:')) {
+      event.description = line.replace('DESCRIPTION:', '').trim();
+    } else if (line.startsWith('END:VEVENT')) {
+      events.push(event);
+    }
   });
 
-  // Show the selected page
-  document.getElementById(pageId).style.display = 'block';
+  return events;
 }
 
-// Handle login form submission
-document.getElementById("login-form").addEventListener("submit", function (event) {
-  event.preventDefault();
+// Function to display parsed Canvas assignments
+function displayAssignments(events) {
+  const assignmentsList = document.getElementById('assignmentsList');
+  assignmentsList.innerHTML = ""; // Clear existing assignments
 
-  const userName = document.getElementById("user-name").value.trim();
-  if (!userName) {
-    document.getElementById("login-status").textContent = "Please enter a valid name.";
+  if (events.length === 0) {
+    assignmentsList.innerHTML = "<p>No upcoming assignments found.</p>";
     return;
   }
 
-  // Retrieve stored credentials from localStorage
-  const userCredentials = JSON.parse(localStorage.getItem('userCredentials')) || {};
+  const list = document.createElement('ul');
+  
+  events.forEach(event => {
+    const listItem = document.createElement('li');
+    const startDate = new Date(event.startDate);
+    const endDate = new Date(event.endDate);
+    
+    listItem.innerHTML = `
+      <strong>${event.title}</strong><br>
+      <small>Start: ${startDate.toLocaleString()}<br>
+      End: ${endDate.toLocaleString()}</small><br>
+      <p>${event.description || 'No description available'}</p>
+    `;
+    
+    list.appendChild(listItem);
+  });
 
-  if (userCredentials[userName]) {
-    apiKey = userCredentials[userName].apiKey;
-    canvasDomain = userCredentials[userName].domain;
-
-    // Hide the login page and show the main content
-    document.getElementById("login-page").style.display = "none";
-    document.getElementById("main-content").style.display = "block";
-
-    // Fetch assignments after login
-    fetchAssignments();
-  } else {
-    document.getElementById("login-status").textContent =
-      "No credentials found for this name. Please add them in the 'API Tokens' tab.";
-  }
-});
-
-// Save user credentials in the "API Tokens" tab
-document.getElementById("tokens-form").addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const userName = prompt("Enter the name to associate with these tokens:");
-  if (!userName) {
-    alert("Name is required to save credentials.");
-    return;
-  }
-
-  const canvasToken = document.getElementById("canvas-token").value;
-  const cleverToken = document.getElementById("clever-token").value;
-  const canvasDomain = document.getElementById("canvas-domain").value;
-
-  if (!canvasToken || !canvasDomain) {
-    alert("Canvas token and domain are required.");
-    return;
-  }
-
-  // Save credentials to local storage
-  const userCredentials = JSON.parse(localStorage.getItem('userCredentials')) || {};
-  userCredentials[userName] = {
-    apiKey: canvasToken,
-    domain: canvasDomain,
-    cleverToken: cleverToken || '',
-  };
-
-  localStorage.setItem('userCredentials', JSON.stringify(userCredentials));
-  document.getElementById('tokens-status').textContent = 'Tokens saved successfully!';
-});
-
-// Fetch assignments from Canvas API
-function fetchAssignments() {
-  if (!apiKey || !canvasDomain) {
-    alert("Missing API credentials. Please log in first.");
-    return;
-  }
-
-  fetch(`https://${canvasDomain}/api/v1/planner/items`, {
-    headers: { Authorization: `Bearer ${apiKey}` },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const assignmentsList = document.getElementById("assignments-list");
-      assignmentsList.innerHTML = '';
-      data.forEach((item) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = `${item.plannable.title} (Due: ${item.plannable.due_at})`;
-        assignmentsList.appendChild(listItem);
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching assignments:", error);
-    });
+  assignmentsList.appendChild(list);
 }
-
-// Home button functionality (return to login page)
-document.getElementById("home-button").addEventListener("click", function () {
-  document.getElementById("main-content").style.display = "none";
-  document.getElementById("login-page").style.display = "block";
-});
