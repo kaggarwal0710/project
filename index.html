@@ -9,16 +9,18 @@
 <body>
   <div id="container">
     <header>
-      <h1>School App</h1>
+      <h1><a href="#" onclick="showTab('home')">School App</a></h1>
       <nav>
         <ul>
           <li><a href="#" onclick="showTab('home')">Home</a></li>
           <li><a href="#" onclick="showTab('canvas')">Canvas</a></li>
+          <li><a href="#" onclick="showTab('clever')">Clever</a></li>
           <li><a href="#" onclick="showTab('apiTokens')">API Tokens</a></li>
+          <li><a href="#" onclick="showTab('login')">Login</a></li>
         </ul>
       </nav>
     </header>
-    
+
     <div id="tabs">
       <div id="home" class="tab-content active">
         <h2>Welcome to the School App!</h2>
@@ -33,9 +35,32 @@
         <div id="assignmentsList"></div>
       </div>
 
+      <div id="clever" class="tab-content">
+        <h2>Your Clever Data</h2>
+        <p>Enter your Clever credentials to fetch your data here.</p>
+        <label for="cleverUsername">Username:</label>
+        <input type="text" id="cleverUsername" placeholder="Enter your Clever username">
+        <label for="cleverPassword">Password:</label>
+        <input type="password" id="cleverPassword" placeholder="Enter your Clever password">
+        <button onclick="loadCleverData()">Fetch Clever Data</button>
+        <div id="cleverData"></div>
+      </div>
+
       <div id="apiTokens" class="tab-content">
         <h2>API Tokens</h2>
-        <!-- Form for API tokens -->
+        <label for="canvasApiToken">Canvas API Token:</label>
+        <input type="text" id="canvasApiToken" placeholder="Enter Canvas API Token">
+        <label for="cleverApiToken">Clever API Token:</label>
+        <input type="text" id="cleverApiToken" placeholder="Enter Clever API Token">
+        <button onclick="saveApiTokens()">Save Tokens</button>
+      </div>
+
+      <div id="login" class="tab-content">
+        <h2>Login</h2>
+        <label for="loginName">Enter Your Name:</label>
+        <input type="text" id="loginName" placeholder="Your Name">
+        <button onclick="login()">Login</button>
+        <div id="loginStatus"></div>
       </div>
     </div>
   </div>
