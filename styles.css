@@ -1,221 +1,82 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body and container */
+/* General Styles */
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
-  padding: 20px;
-}
-
-#container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #005a8b;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-header h1 {
-  font-size: 1.8em;
-}
-
-header nav ul {
-  list-style-type: none;
-  display: flex;
-  gap: 15px;
-}
-
-header nav ul li {
-  font-size: 1.2em;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-header nav ul li a:hover {
-  color: #ffd700;
-}
-
-/* Tabs */
-#tabs {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-/* Canvas Tab */
-#canvas {
-  font-size: 1.2em;
-}
-
-#canvas input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-  transition: border-color 0.3s;
-}
-
-#canvas input[type="text"]:focus {
-  border-color: #005a8b;
-}
-
-#canvas button {
-  background-color: #005a8b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1.1em;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-#canvas button:hover {
-  background-color: #00457c;
-}
-
-#assignmentsList {
-  margin-top: 20px;
-}
-
-#assignmentsList ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-#assignmentsList ul li {
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-#assignmentsList ul li:hover {
-  background-color: #f0f0f0;
-}
-
-#assignmentsList strong {
-  font-size: 1.4em;
-  color: #005a8b;
-}
-
-#assignmentsList small {
-  font-size: 0.9em;
-  color: #777;
-}
-
-#assignmentsList p {
-  margin-top: 10px;
-  font-size: 1em;
-}
-
-/* Clever Tab */
-#clever input[type="text"],
-#clever input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-#clever button {
-  background-color: #005a8b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1.1em;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-#clever button:hover {
-  background-color: #00457c;
-}
-
-/* API Token Tab */
-#apiTokens input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-#apiTokens button {
-  background-color: #005a8b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1.1em;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-#apiTokens button:hover {
-  background-color: #00457c;
-}
-
-/* Login Tab */
-#login input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-#login button {
-  background-color: #005a8b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1.1em;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-#login button:hover {
-  background-color: #00457c;
-}
-
-#loginStatus {
-  margin-top: 10px;
-}
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  /* Navbar Styles */
+  #navbar {
+    display: flex;
+    align-items: center;
+    background-color: #0073e6;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #navbar button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  #navbar button:hover {
+    background-color: #005bb5;
+    border-radius: 5px;
+  }
+  
+  #home-button {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: auto;
+  }
+  
+  /* Login Page */
+  #login-page {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  #login-page input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 280px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #login-page button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #login-page button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Tab Content */
+  .tab-content {
+    display: none;
+    padding: 20px;
+    margin: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab-content h2 {
+    color: #0073e6;
+    margin-bottom: 20px;
+  }
+  
