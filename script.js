@@ -1,82 +1,103 @@
-// Function to show the selected tab
-function showTab(tabName) {
-  const tabs = document.querySelectorAll('.tab-content');
-  tabs.forEach(tab => {
-    tab.style.display = tab.id === tabName ? 'block' : 'none';
-  });
+// Initial Canvas API credentials (Empty until login)
+let apiKey = '';
+let canvasDomain = '';
+
+// Tab functionality
+function openTab(event, tabName) {
+  const tabs = document.getElementsByClassName("tab-content");
+  for (let tab of tabs) {
+    tab.style.display = "none";
+  }
+
+  const tabButtons = document.getElementsByClassName("tab-button");
+  for (let button of tabButtons) {
+    button.style.backgroundColor = "";
+  }
+
+  document.getElementById(tabName).style.display = "block";
+  event.currentTarget.style.backgroundColor = "#005bb5";
 }
 
-// Function to fetch and display Canvas assignments from iCal feed
-async function loadCanvasAssignments() {
-  const feedURL = document.getElementById('canvasFeedURL').value.trim();
-  if (!feedURL) {
-    alert("Please enter your Canvas Calendar Feed URL.");
+// Canvas - Fetch upcoming assignments
+async function fetchAssignments() {
+  if (!apiKey || !canvasDomain) {
+    alert("You need to login first.");
     return;
   }
 
-  try {
-    const response = await fetch(feedURL);
-    const icalText = await response.text();
-    const parsedEvents = parseICS(icalText);
-    displayAssignments(parsedEvents);
-  } catch (error) {
-    console.error("Error fetching Canvas calendar feed:", error);
-    alert("There was an error fetching the Canvas calendar feed.");
-  }
-}
-
-// Function to parse the iCal feed (ICS format)
-function parseICS(icsData) {
-  const events = [];
-  const lines = icsData.split('\n');
-  let event = {};
-  
-  lines.forEach(line => {
-    line = line.trim();
-    if (line.startsWith('BEGIN:VEVENT')) {
-      event = {};
-    } else if (line.startsWith('SUMMARY:')) {
-      event.title = line.replace('SUMMARY:', '').trim();
-    } else if (line.startsWith('DTSTART:')) {
-      event.startDate = line.replace('DTSTART:', '').trim();
-    } else if (line.startsWith('DTEND:')) {
-      event.endDate = line.replace('DTEND:', '').trim();
-    } else if (line.startsWith('DESCRIPTION:')) {
-      event.description = line.replace('DESCRIPTION:', '').trim();
-    } else if (line.startsWith('END:VEVENT')) {
-      events.push(event);
-    }
+  const response = await fetch(`https://${canvasDomain}/api/v1/courses/self/assignments`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+    },
   });
 
-  return events;
-}
-
-// Function to display parsed Canvas assignments
-function displayAssignments(events) {
-  const assignmentsList = document.getElementById('assignmentsList');
-  assignmentsList.innerHTML = ""; // Clear existing assignments
-
-  if (events.length === 0) {
-    assignmentsList.innerHTML = "<p>No upcoming assignments found.</p>";
-    return;
-  }
-
-  const list = document.createElement('ul');
+  const data = await response.json();
+  console.log(data);
   
-  events.forEach(event => {
-    const listItem = document.createElement('li');
-    const startDate = new Date(event.startDate);
-    const endDate = new Date(event.endDate);
-    
-    listItem.innerHTML = `
-      <strong>${event.title}</strong><br>
-      <small>Start: ${startDate.toLocaleString()}<br>
-      End: ${endDate.toLocaleString()}</small><br>
-      <p>${event.description || 'No description available'}</p>
-    `;
-    
-    list.appendChild(listItem);
-  });
+  if (data && Array.isArray(data)) {
+    const assignmentsList = document.getElementById("assignments-list");
+    assignmentsList.innerHTML = '';
 
-  assignmentsList.appendChild(list);
+    data.forEach(assignment => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${assignment.name} - Due: ${assignment.due_at}`;
+        assignmentsList.appendChild(listItem);
+    });
+} else {
+    console.error("No assignments found or API response is incorrect");
 }
+}
+
+// Handle login form submission
+document.getElementById("login-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  apiKey = document.getElementById("api-token").value;
+  canvasDomain = document.getElementById("canvas-domain").value;
+
+  // Save credentials to local storage for reuse
+  localStorage.setItem('canvasApiKey', apiKey);
+  localStorage.setItem('canvasDomain', canvasDomain);
+
+  // Hide login page and show main content
+  document.getElementById("login-page").style.display = "none";
+  document.getElementById("main-content").style.display = "block";
+
+  // Fetch Canvas assignments
+  fetchAssignments();
+});
+
+// Load saved tokens when opening the "API Tokens" tab
+function loadSavedTokens() {
+  const canvasToken = localStorage.getItem('canvasApiKey') || '';
+  const cleverToken = localStorage.getItem('cleverApiKey') || '';
+
+  document.getElementById('canvas-token').value = canvasToken;
+  document.getElementById('clever-token').value = cleverToken;
+}
+
+// Handle tokens form submission
+document.getElementById("tokens-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const canvasToken = document.getElementById('canvas-token').value;
+  const cleverToken = document.getElementById('clever-token').value;
+
+  // Save tokens to local storage
+  localStorage.setItem('canvasApiKey', canvasToken);
+  localStorage.setItem('cleverApiKey', cleverToken);
+
+  document.getElementById('tokens-status').textContent = 'Tokens saved successfully!';
+});
+
+// Home button functionality
+function homePage() {
+  document.getElementById("main-content").style.display = "none";
+  document.getElementById("login-page").style.display = "block";
+  document.getElementById("api-token").value = '';
+  document.getElementById("canvas-domain").value = '';
+}
+
+// Load tokens when the "API Tokens" tab is opened
+document.querySelector('button[onclick*="openTab(event, \'tokens\')"]').addEventListener('click', loadSavedTokens);
