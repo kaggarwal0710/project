@@ -1,166 +1,141 @@
-/* General styles */
-body {
-  font-family: 'Arial', sans-serif;
+/* General Reset */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  box-sizing: border-box;
 }
 
-/* Top navigation bar */
-.top-bar {
-  background-color: #0078d4;
-  padding: 10px;
-  color: white;
+/* Body and container */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  padding: 20px;
+}
+
+#container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.top-bar h1 {
-  margin: 0;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.nav-bar {
-  display: flex;
-  gap: 10px;
-}
-
-.nav-bar button {
-  background-color: white;
-  color: #0078d4;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-size: 1em;
+  align-items: center;
+  background-color: #005a8b;
+  color: white;
+  padding: 15px;
   border-radius: 5px;
 }
 
-.nav-bar button:hover {
-  background-color: #005bb5;
-  color: white;
-}
-
-/* Main content area */
-#main-content {
-  padding: 80px 20px 20px;
-}
-
-/* Login page styles */
-#login-page {
-  display: block;
-  padding: 40px;
-  margin-top: 80px;
-  background-color: #ffffff;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-#login-page h2 {
-  text-align: center;
-  margin-bottom: 20px;
+header h1 {
   font-size: 1.8em;
-  color: #333;
 }
 
-#login-page form {
+header nav ul {
+  list-style-type: none;
   display: flex;
-  flex-direction: column;
+  gap: 15px;
 }
 
-#login-page label {
-  font-size: 1.1em;
-  color: #333;
+header nav ul li {
+  font-size: 1.2em;
 }
 
-#login-page input {
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1.1em;
-}
-
-#login-page input:focus {
-  border-color: #0078d4;
-  outline: none;
-}
-
-#login-page button {
-  background-color: #0078d4;
+header nav ul li a {
   color: white;
-  border: none;
-  padding: 12px;
-  font-size: 1.1em;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-#login-page button:hover {
-  background-color: #005bb5;
+header nav ul li a:hover {
+  color: #ffd700;
 }
 
-#login-status {
-  color: red;
-  margin-top: 10px;
-  font-size: 1em;
-  text-align: center;
-}
-
-/* API Tokens Page Styling */
-#tokens-page {
-  display: none;
+/* Tabs */
+#tabs {
+  margin-top: 30px;
   padding: 20px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Assignments page styles */
-#assignments-page {
+.tab-content {
   display: none;
 }
 
-#assignments-page ul {
+.tab-content.active {
+  display: block;
+}
+
+/* Canvas Tab */
+#canvas {
+  font-size: 1.2em;
+}
+
+#canvas input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+#canvas input[type="text"]:focus {
+  border-color: #005a8b;
+}
+
+#canvas button {
+  background-color: #005a8b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#canvas button:hover {
+  background-color: #00457c;
+}
+
+#assignmentsList {
+  margin-top: 20px;
+}
+
+#assignmentsList ul {
   list-style-type: none;
   padding: 0;
 }
 
-#assignments-page li {
-  background-color: white;
-  padding: 10px;
-  margin: 10px 0;
+#assignmentsList ul li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-#assignments-page li:hover {
-  background-color: #f4f4f4;
+#assignmentsList ul li:hover {
+  background-color: #f0f0f0;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .nav-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+#assignmentsList strong {
+  font-size: 1.4em;
+  color: #005a8b;
+}
 
-  .nav-bar button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+#assignmentsList small {
+  font-size: 0.9em;
+  color: #777;
+}
 
-  #login-page form,
-  #tokens-page form {
-    width: 100%;
-  }
+#assignmentsList p {
+  margin-top: 10px;
+  font-size: 1em;
 }
