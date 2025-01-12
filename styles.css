@@ -139,3 +139,83 @@ header nav ul li a:hover {
   margin-top: 10px;
   font-size: 1em;
 }
+
+/* Clever Tab */
+#clever input[type="text"],
+#clever input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+#clever button {
+  background-color: #005a8b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#clever button:hover {
+  background-color: #00457c;
+}
+
+/* API Token Tab */
+#apiTokens input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+#apiTokens button {
+  background-color: #005a8b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#apiTokens button:hover {
+  background-color: #00457c;
+}
+
+/* Login Tab */
+#login input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+#login button {
+  background-color: #005a8b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#login button:hover {
+  background-color: #00457c;
+}
+
+#loginStatus {
+  margin-top: 10px;
+}
